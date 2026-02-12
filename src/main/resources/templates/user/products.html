@@ -3,63 +3,67 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog | Storefront</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 
 <body>
     <header class="main-header">
         <div class="container header-content">
-            <h1 class="logo">Product Co.</h1>
+            <h1 class="logo">🛍️ Storefront</h1>
             <nav class="main-nav">
                 <a th:href="@{/user/dashboard}">Dashboard</a>
                 <a th:href="@{/user/orders}">My Orders</a>
-                <a th:href="@{/login}">Logout</a>
+                <a th:href="@{/login}" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Logout</a>
             </nav>
         </div>
     </header>
 
-    <main class="container">
-        <h2 class="page-title">Available Products</h2>
+    <main class="container animate-fade-in" style="padding-top: 3rem;">
+        <div style="margin-bottom: 3rem;">
+            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Explore Catalog</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Find the best products at unbeatable prices.</p>
+        </div>
 
-        <div class="search-section" style="margin-bottom: 2rem;">
-            <form th:action="@{/user/products/search}" method="get" class="search-form"
-                style="display: flex; gap: 1rem;">
-                <input type="text" name="q" th:value="${searchQuery}" placeholder="Search products..."
-                    style="flex-grow: 1; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;" required />
-                <button type="submit" class="btn">Search</button>
-                <a th:if="${searchQuery}" th:href="@{/user/products}" class="btn btn-secondary"
-                    style="background-color: #6c757d;">Clear</a>
+        <section class="card" style="margin-bottom: 4rem; padding: 1.5rem;">
+            <form th:action="@{/user/products/search}" method="get" style="display: flex; gap: 1rem;">
+                <input type="text" name="q" th:value="${searchQuery}" placeholder="What are you looking for?"
+                    style="flex-grow: 1;" required />
+                <button type="submit" class="btn btn-primary">Search</button>
+                <a th:if="${searchQuery}" th:href="@{/user/products}" class="btn btn-secondary">Clear Results</a>
             </form>
-        </div>
-        <div class="table-wrapper">
-            <table class="styled-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Order</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="p : ${products}">
-                        <td th:text="${p.id}">1</td>
-                        <td th:text="${p.name}">Name</td>
-                        <td th:text="${p.description}">Description</td>
-                        <td th:text="'$' + ${p.price}">$0.00</td>
-                        <td th:text="${p.quantity}">0</td>
-                        <td>
-                            <form th:action="@{'/user/order/' + ${p.id}}" method="post">
-                                <button type="submit" class="btn">Order</button>
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        </section>
+
+        <section
+            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 5rem;">
+            <div th:each="p : ${products}" class="card" style="display: flex; flex-direction: column; height: 100%;">
+                <div style="flex-grow: 1;">
+                    <span
+                        style="font-size: 0.75rem; color: var(--accent-primary); font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;">Premium
+                        Product</span>
+                    <h3 th:text="${p.name}" style="font-size: 1.5rem; margin: 0.5rem 0 1rem; font-weight: 700;">Product
+                        Name</h3>
+                    <p th:text="${p.description}"
+                        style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                        Description</p>
+                </div>
+
+                <div
+                    style="border-top: 1px solid var(--border-glass); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="color: var(--text-muted); font-size: 0.8rem; display: block;">Price</span>
+                        <span th:text="'$' + ${p.price}"
+                            style="font-size: 1.5rem; font-weight: 800; color: var(--text-main);">$0.00</span>
+                    </div>
+                    <form th:action="@{'/user/order/' + ${p.id}}" method="post">
+                        <button type="submit" class="btn btn-primary" th:disabled="${p.quantity <= 0}">
+                            <span th:text="${p.quantity > 0 ? 'Buy Now' : 'Out of Stock'}">Buy Now</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 

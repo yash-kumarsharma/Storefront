@@ -38,19 +38,30 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login") // admin login
                         .successHandler((request, response, authentication) -> {
-                            boolean isAdmin = authentication.getAuthorities().stream()
-                                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-                            boolean isUser = authentication.getAuthorities().stream()
-                                    .anyMatch(a -> a.getAuthority().equals("ROLE_USER"));
-                            if (isAdmin)
-                                response.sendRedirect("/admin/dashboard");
-                            else if (isUser)
-                                response.sendRedirect("/user/dashboard");
+                            try {
+                                boolean isAdmin = authentication.getAuthorities().stream()
+                                        .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+                                boolean isUser = authentication.getAuthorities().stream()
+                                        .anyMatch(a -> a.getAuthority().equals("ROLE_USER"));
+
+                                if (isAdmin) {
+                                    response.sendRedirect("/admin/dashboard");
+                                } else if (isUser) {
+                                    response.sendRedirect("/user/dashboard");
+                                } else {
+                                    // Default redirect if no role matched
+                                    response.sendRedirect("/");
+                                }
+                            } catch (Exception e) {
+                                // Log error and redirect to home
+                                e.printStackTrace();
+                                response.sendRedirect("/");
+                            }
                         })
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/choose-login?logout")
+                        .logoutSuccessUrl("/login?logout")
                         .permitAll());
 
         return http.build();

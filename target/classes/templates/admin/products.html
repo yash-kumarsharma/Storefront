@@ -3,63 +3,72 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Manage Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Products | Storefront</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
 
 <body>
     <header class="main-header">
         <div class="container header-content">
-            <h1 class="logo">Product Admin</h1>
+            <h1 class="logo">🛍️ Storefront Admin</h1>
             <nav class="main-nav">
                 <a th:href="@{/admin/dashboard}">Dashboard</a>
                 <a th:href="@{/admin/orders}">Orders</a>
-                <a th:href="@{/login}">Logout</a>
+                <a th:href="@{/login}" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Logout</a>
             </nav>
         </div>
     </header>
 
-    <main class="container">
-        <div class="products-header">
-            <h2 class="page-title">Manage Products</h2>
-            <a th:href="@{/admin/products/new}" class="btn">+ Create New Product</a>
+    <main class="container animate-fade-in" style="padding-top: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+            <h2 style="font-size: 2.25rem; font-weight: 800;">Inventory</h2>
+            <a th:href="@{/admin/products/new}" class="btn btn-primary">+ Add Product</a>
         </div>
 
-        <div class="search-section" style="margin-bottom: 2rem;">
-            <form th:action="@{/admin/products/search}" method="get" class="search-form"
-                style="display: flex; gap: 1rem;">
-                <input type="text" name="q" th:value="${searchQuery}" placeholder="Search products..."
-                    style="flex-grow: 1; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;" required />
-                <button type="submit" class="btn">Search</button>
-                <a th:if="${searchQuery}" th:href="@{/admin/products}" class="btn btn-secondary"
-                    style="background-color: #6c757d;">Clear</a>
+        <section class="card" style="margin-bottom: 2.5rem; padding: 1.5rem;">
+            <form th:action="@{/admin/products/search}" method="get" style="display: flex; gap: 1rem;">
+                <input type="text" name="q" th:value="${searchQuery}" placeholder="Search catalog..."
+                    style="flex-grow: 1;" required />
+                <button type="submit" class="btn btn-primary">Search</button>
+                <a th:if="${searchQuery}" th:href="@{/admin/products}" class="btn btn-secondary">Clear</a>
             </form>
-        </div>
-        <div class="table-wrapper">
-            <table class="styled-table">
+        </section>
+
+        <div class="table-container animate-fade-in">
+            <table>
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Actions</th>
+                        <th>Stock</th>
+                        <th style="text-align: right;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="p : ${products}">
-                        <td th:text="${p.id}">1</td>
-                        <td th:text="${p.name}">Name</td>
-                        <td th:text="${p.description}">Description</td>
-                        <td th:text="'$' + ${p.price}">$0.00</td>
-                        <td th:text="${p.quantity}">0</td>
+                        <td th:text="${p.id}" style="font-weight: 600; color: var(--accent-primary);">1</td>
+                        <td th:text="${p.name}" style="font-weight: 700;">Name</td>
+                        <td th:text="${p.description}"
+                            style="color: var(--text-muted); max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            Description</td>
+                        <td th:text="'$' + ${p.price}" style="font-weight: 600;">$0.00</td>
                         <td>
-                            <a th:href="@{'/admin/products/edit/' + ${p.id}}" class="btn btn-edit">Edit</a>
-                            <form th:action="@{'/admin/products/delete/' + ${p.id}}" method="post"
-                                style="display:inline">
-                                <button type="submit" class="btn btn-delete">Delete</button>
-                            </form>
+                            <span th:text="${p.quantity}"
+                                th:style="${p.quantity < 10 ? 'color: #f43f5e; font-weight: bold;' : 'color: #10b981; font-weight: bold;'}">0</span>
+                        </td>
+                        <td style="text-align: right;">
+                            <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+                                <a th:href="@{'/admin/products/edit/' + ${p.id}}" class="btn btn-secondary"
+                                    style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Edit</a>
+                                <form th:action="@{'/admin/products/delete/' + ${p.id}}" method="post"
+                                    style="display:inline">
+                                    <button type="submit" class="btn"
+                                        style="background: rgba(244, 63, 94, 0.1); color: #f43f5e; padding: 0.4rem 0.8rem; font-size: 0.85rem;">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

@@ -1,54 +1,70 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8" />
-  <title th:text="${product.id == null ? 'Create Product' : 'Edit Product'}"></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${product.id == null ? 'Create Product | Storefront' : 'Edit Product | Storefront'}"></title>
   <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
-<body>
-<header class="main-header">
-  <div class="container header-content">
-    <h1 class="logo">Product Admin</h1>
-    <nav class="main-nav">
-      <a th:href="@{/admin/dashboard}">Dashboard</a>
-      <a th:href="@{/admin/products}">Products</a>
-      <a th:href="@{/login}">Logout</a>
-    </nav>
-  </div>
-</header>
 
-<main class="container">
-  <section class="form-section center">
-    <h2 class="page-title" th:text="${product.id == null ? 'Create Product' : 'Edit Product'}"></h2>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+  <header class="main-header">
+    <div class="container header-content">
+      <h1 class="logo">🛍️ Storefront Admin</h1>
+      <nav class="main-nav">
+        <a th:href="@{/admin/dashboard}">Dashboard</a>
+        <a th:href="@{/admin/products}">Products</a>
+        <a th:href="@{/login}" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Logout</a>
+      </nav>
+    </div>
+  </header>
 
-    <form th:action="@{/admin/products}" th:object="${product}" method="post" class="styled-form">
-      <input type="hidden" th:field="*{id}" />
+  <main class="container animate-fade-in"
+    style="flex-grow: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 0;">
+    <section class="card" style="width: 100%; max-width: 600px; padding: 3rem;">
+      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 2rem; text-align: center;"
+        th:text="${product.id == null ? 'New Product' : 'Edit Product'}"></h2>
 
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" th:field="*{name}" required />
-      </div>
+      <form th:action="@{/admin/products}" th:object="${product}" method="post">
+        <input type="hidden" th:field="*{id}" />
 
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea id="description" th:field="*{description}"></textarea>
-      </div>
+        <div style="margin-bottom: 1.5rem;">
+          <label for="name"
+            style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted);">Product
+            Name</label>
+          <input type="text" id="name" th:field="*{name}" placeholder="e.g. Ultra Gaming Mouse" required />
+        </div>
 
-      <div class="form-group">
-        <label for="price">Price</label>
-        <input type="number" step="0.01" id="price" th:field="*{price}" required />
-      </div>
+        <div style="margin-bottom: 1.5rem;">
+          <label for="description"
+            style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted);">Description</label>
+          <textarea id="description" th:field="*{description}" placeholder="Brief details about the product..."
+            rows="4"></textarea>
+        </div>
 
-      <div class="form-group">
-        <label for="quantity">Quantity</label>
-        <input type="number" id="quantity" th:field="*{quantity}" required />
-      </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem;">
+          <div>
+            <label for="price"
+              style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted);">Price
+              ($)</label>
+            <input type="number" step="0.01" id="price" th:field="*{price}" placeholder="0.00" required />
+          </div>
+          <div>
+            <label for="quantity"
+              style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted);">Initial
+              Stock</label>
+            <input type="number" id="quantity" th:field="*{quantity}" placeholder="0" required />
+          </div>
+        </div>
 
-      <div class="form-actions">
-        <button type="submit" class="btn">Save Product</button>
-      </div>
-    </form>
-  </section>
-</main>
+        <div style="display: flex; gap: 1rem;">
+          <button type="submit" class="btn btn-primary" style="flex: 2; padding: 1rem;">Save Changes</button>
+          <a th:href="@{/admin/products}" class="btn btn-secondary" style="flex: 1; padding: 1rem;">Cancel</a>
+        </div>
+      </form>
+    </section>
+  </main>
 </body>
+
 </html>

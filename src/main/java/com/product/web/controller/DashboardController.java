@@ -27,10 +27,19 @@ public class DashboardController {
      */
     @GetMapping("/admin/dashboard")
     public String adminDashboard(Model model) {
-        model.addAttribute("totalUsers", userService.getTotalUsersCount());
-        model.addAttribute("totalProducts", productService.getTotalProductsCount());
-        model.addAttribute("totalOrders", orderService.getTotalOrdersCount());
-        model.addAttribute("totalRevenue", orderService.getTotalRevenue());
+        try {
+            model.addAttribute("totalUsers", userService.getTotalUsersCount());
+            model.addAttribute("totalProducts", productService.getTotalProductsCount());
+            model.addAttribute("totalOrders", orderService.getTotalOrdersCount());
+            model.addAttribute("totalRevenue", orderService.getTotalRevenue());
+        } catch (Exception e) {
+            // If there's an error, provide default values
+            e.printStackTrace();
+            model.addAttribute("totalUsers", 0L);
+            model.addAttribute("totalProducts", 0L);
+            model.addAttribute("totalOrders", 0L);
+            model.addAttribute("totalRevenue", 0.0);
+        }
         return "admin/dashboard";
     }
 
@@ -39,9 +48,15 @@ public class DashboardController {
      */
     @GetMapping("/user/dashboard")
     public String userDashboard(Model model) {
-        // 3. Call the service method and add the result to the model
-        long count = orderService.countOrdersForCurrentUser();
-        model.addAttribute("orderCount", count);
+        try {
+            // 3. Call the service method and add the result to the model
+            long count = orderService.countOrdersForCurrentUser();
+            model.addAttribute("orderCount", count);
+        } catch (Exception e) {
+            // If there's an error getting order count, default to 0
+            e.printStackTrace();
+            model.addAttribute("orderCount", 0L);
+        }
 
         return "user/dashboard";
     }

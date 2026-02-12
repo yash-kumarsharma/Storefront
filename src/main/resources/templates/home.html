@@ -1,30 +1,137 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8" />
-    <title>Welcome | Product Co.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Storefront</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
-<body>
-<header class="main-header">
-    <div class="container header-content">
-        <h1 class="logo">Product Co.</h1>
-        <nav class="main-nav">
-            <a th:href="@{/login}">Login</a>
-            <a th:href="@{/signup}">Sign Up</a>
-        </nav>
-    </div>
-</header>
 
-<main class="container center text-center">
-    <section class="hero">
-        <h1>Welcome to Product Co.</h1>
-        <p>Your one-stop solution for product management and browsing.</p>
-        <br>
-        <div class="hero-actions">
-            <a th:href="@{/login}" class="btn">Login Now</a>
+<body style="display: flex; flex-direction: column; min-height: 100vh;">
+    <header class="main-header">
+        <div class="container header-content">
+            <h1 class="logo">🛍️ Storefront</h1>
+            <nav class="main-nav">
+                <a th:href="@{/login}">Login</a>
+                <a th:href="@{/signup}">Sign Up</a>
+            </nav>
         </div>
-    </section>
-</main>
+    </header>
+
+    <!-- Decorative floating elements -->
+    <div
+        style="position: fixed; top: 10%; left: 5%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(20, 241, 149, 0.12) 0%, transparent 70%); border-radius: 50%; filter: blur(70px); animation: float 7s ease-in-out infinite; z-index: 0;">
+    </div>
+    <div
+        style="position: fixed; bottom: 10%; right: 5%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%); border-radius: 50%; filter: blur(90px); animation: float 9s ease-in-out infinite 1.5s; z-index: 0;">
+    </div>
+
+    <main class="container animate-fade-in"
+        style="flex-grow: 1; display: flex; align-items: center; justify-content: center; padding: 4rem 0; position: relative; z-index: 1;">
+        <section style="text-align: center; max-width: 900px;">
+            <div style="margin-bottom: 3rem;">
+                <div
+                    style="width: 120px; height: 120px; margin: 0 auto 2rem; background: var(--accent-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 60px rgba(20, 241, 149, 0.5); animation: float 5s ease-in-out infinite;">
+                    <span style="font-size: 4rem;">🛍️</span>
+                </div>
+                <h1
+                    style="font-size: clamp(3rem, 8vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem;">
+                    Modern Commerce <br>
+                    <span
+                        style="background: var(--accent-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;">Redefined.</span>
+                </h1>
+                <p
+                    style="font-size: 1.35rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 3rem; line-height: 1.7;">
+                    Experience the future of e-commerce with our premium platform. Seamless shopping, powerful
+                    management, and cutting-edge technology.
+                </p>
+            </div>
+
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 4rem;">
+                <a th:href="@{/signup}" class="btn btn-primary" style="padding: 1.25rem 3rem; font-size: 1.15rem;">Get
+                    Started</a>
+                <a th:href="@{/login}" class="btn btn-secondary" style="padding: 1.25rem 3rem; font-size: 1.15rem;">Sign
+                    In</a>
+            </div>
+
+            <!-- Feature Cards -->
+            <div
+                style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 5rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <div class="card" style="padding: 2.5rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Lightning Fast</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Optimized performance for seamless browsing
+                        and instant transactions.</p>
+                </div>
+                <div class="card" style="padding: 2.5rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Secure & Safe</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Enterprise-grade security to protect your
+                        data and transactions.</p>
+                </div>
+                <div class="card" style="padding: 2.5rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Smart Analytics</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Real-time insights and analytics to grow your
+                        business.</p>
+                </div>
+                <div class="card" style="padding: 2.5rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🌍</div>
+                    <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Global Reach</h3>
+                    <p style="color: var(--text-muted); line-height: 1.6;">Connect with customers worldwide with
+                        multi-currency support.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+        style="background: rgba(10, 15, 26, 0.9); border-top: 2px solid var(--border-glass); padding: 3rem 0 2rem; margin-top: auto; position: relative; z-index: 1;">
+        <div class="container">
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+                <div>
+                    <h3
+                        style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; background: var(--accent-gradient); -webkit-background-clip: text; background-clip: text; color: transparent;">
+                        🛍️ Storefront</h3>
+                    <p style="color: var(--text-muted); line-height: 1.7;">The next generation e-commerce platform built
+                        for modern businesses and consumers.</p>
+                </div>
+                <div>
+                    <h4 style="font-weight: 700; margin-bottom: 1rem; color: var(--text-main);">Quick Links</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.75rem;"><a th:href="@{/}"
+                                style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;"
+                                onmouseover="this.style.color='var(--accent-primary)'"
+                                onmouseout="this.style.color='var(--text-muted)'">Home</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a th:href="@{/login}"
+                                style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;"
+                                onmouseover="this.style.color='var(--accent-primary)'"
+                                onmouseout="this.style.color='var(--text-muted)'">Login</a></li>
+                        <li style="margin-bottom: 0.75rem;"><a th:href="@{/signup}"
+                                style="color: var(--text-muted); text-decoration: none; transition: color 0.3s;"
+                                onmouseover="this.style.color='var(--accent-primary)'"
+                                onmouseout="this.style.color='var(--text-muted)'">Sign Up</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-weight: 700; margin-bottom: 1rem; color: var(--text-main);">Features</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 0.75rem; color: var(--text-muted);">✓ Product Management</li>
+                        <li style="margin-bottom: 0.75rem; color: var(--text-muted);">✓ Order Tracking</li>
+                        <li style="margin-bottom: 0.75rem; color: var(--text-muted);">✓ Real-time Analytics</li>
+                        <li style="margin-bottom: 0.75rem; color: var(--text-muted);">✓ Secure Payments</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--border-glass); padding-top: 2rem; text-align: center;">
+                <p style="color: var(--text-muted); font-size: 0.95rem;">© 2026 Storefront. Built with Spring Boot &
+                    Modern Web Technologies.</p>
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>

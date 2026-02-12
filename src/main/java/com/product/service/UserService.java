@@ -62,6 +62,11 @@ public class UserService {
             throw new IllegalArgumentException("Password cannot be empty");
         }
 
+        // Check if email already exists
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new IllegalArgumentException("Email already registered. Please use a different email or login.");
+        }
+
         // encode password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 

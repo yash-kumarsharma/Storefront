@@ -1,28 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8" />
-    <title>User Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard | Storefront</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-<header class="main-header">
-    <div class="container header-content">
-        <h1 class="logo">Product Co.</h1>
-        <nav class="main-nav">
-            <a th:href="@{/user/products}">Products</a>
-            <a th:href="@{/user/orders}">My Orders</a>
-            <a th:href="@{/login}">Logout</a>
-        </nav>
-    </div>
-</header>
 
-<main class="container dashboard">
-    <h2 class="page-title">Welcome, User!</h2>
-    <p class="text-center">You have placed <span th:text="${orderCount}">0</span> orders.</p>
-    <div class="text-center" style="margin-top: 2rem;">
-        <a th:href="@{/user/products}" class="btn">Browse Products</a>
-    </div>
-</main>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <h1 class="logo">🛍️ Storefront</h1>
+            <nav class="main-nav">
+                <a th:href="@{/user/products}">Catalog</a>
+                <a th:href="@{/user/orders}">Orders</a>
+                <a th:href="@{/login}" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container animate-fade-in" style="padding-top: 3rem;">
+        <div style="margin-bottom: 3rem;">
+            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">Welcome Back!</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Manage your profile and track your orders in one
+                place.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div class="card"
+                style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 3rem;">
+                <div
+                    style="width: 80px; height: 80px; background: var(--accent-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                    <span style="font-size: 2rem; color: #000; font-weight: 800;">U</span>
+                </div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Member Account</h3>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">You've successfully secured <span
+                        th:text="${orderCount}" style="color: var(--accent-primary); font-weight: 700;">0</span> orders
+                    with us.</p>
+                <a th:href="@{/user/products}" class="btn btn-primary" style="width: 100%;">Browse New Arrivals</a>
+            </div>
+
+            <div class="card" style="padding: 1.5rem;">
+                <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem; font-weight: 700;">Quick Statistics</h3>
+                <canvas id="userStatsChart" style="max-height: 200px;"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <script th:inline="javascript">
+        const ctx = document.getElementById('userStatsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Completed Orders', 'Active Wishlist'],
+                datasets: [{
+                    data: [/*[[${orderCount}]]*/ 0, 5],
+                    backgroundColor: ['#38bdf8', '#818cf8'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#94a3b8', font: { family: 'Plus Jakarta Sans' } }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
+
 </html>

@@ -26,9 +26,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
-        Set<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toSet());
+        // Defensive null check for roles
+        Set<GrantedAuthority> authorities;
+        if (user.getRoles() != null && !user.getRoles().isEmpty()) {
+            authorities = user.getRoles().stream()
+                    .map(role -> new SimpleGrantedAuthority(role.getName()))
+                    .collect(Collectors.toSet());
+        } else {
+            // If no roles, provide empty set (should not happen but prevents NPE)
+            authorities = new java.util.HashSet<>();
+        }
 
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(), user.getPassword(), authorities);

@@ -1,48 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8" />
-    <title>All Orders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Orders | Storefront</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}" />
 </head>
-<body>
-<header class="main-header">
-    <div class="container header-content">
-        <h1 class="logo">Product Admin</h1>
-        <nav class="main-nav">
-            <a th:href="@{/admin/dashboard}">Dashboard</a>
-            <a th:href="@{/admin/products}">Products</a>
-            <a th:href="@{/login}">Logout</a>
-        </nav>
-    </div>
-</header>
 
-<main class="container">
-    <h2 class="page-title">All Customer Orders</h2>
-    <div class="table-wrapper">
-        <table class="styled-table">
-            <thead>
-            <tr>
-                <th>Order ID</th>
-                <th>Date</th>
-                <th>Products</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="o : ${orders}">
-                <td th:text="${o.id}">Order ID</td>
-                <td th:text="${#temporals.format(o.orderDate, 'dd-MM-yyyy HH:mm')}">Date</td>
-                <td>
-                    <ul>
-                        <li th:each="p : ${o.products}" th:text="${p.name}">Product</li>
-                    </ul>
-                </td>
-                <td th:text="${o.status}">Status</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</main>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <h1 class="logo">🛍️ Storefront Admin</h1>
+            <nav class="main-nav">
+                <a th:href="@{/admin/dashboard}">Dashboard</a>
+                <a th:href="@{/admin/products}">Products</a>
+                <a th:href="@{/login}" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container animate-fade-in" style="padding-top: 3rem;">
+        <div style="margin-bottom: 3rem;">
+            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">Order Management</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Monitor and process all incoming customer orders.
+            </p>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Purchased Items</th>
+                        <th style="text-align: right;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="o : ${orders}">
+                        <td th:text="${o.id}" style="font-weight: 600; color: var(--accent-primary);">Order ID</td>
+                        <td th:text="${#temporals.format(o.orderDate, 'MMM dd, yyyy HH:mm')}"
+                            style="color: var(--text-muted);">Date</td>
+                        <td>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <span th:each="p : ${o.products}" th:text="${p.name}"
+                                    style="background: rgba(129, 140, 248, 0.1); color: var(--accent-secondary); padding: 0.25rem 0.75rem; border-radius: 100px; font-size: 0.75rem; font-weight: 700;">
+                                    Product
+                                </span>
+                            </div>
+                        </td>
+                        <td style="text-align: right;">
+                            <span th:text="${o.status}"
+                                style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 0.4rem 0.8rem; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">
+                                Status
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
 </body>
+
 </html>

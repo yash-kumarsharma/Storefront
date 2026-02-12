@@ -1,55 +1,95 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8" />
-  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Storefront</title>
   <link rel="stylesheet" th:href="@{/css/styles.css}" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-<header class="main-header">
-  <div class="container header-content">
-    <h1 class="logo">Product Admin</h1>
-    <nav class="main-nav">
-      <a th:href="@{/admin/products}">Products</a>
-      <a th:href="@{/admin/orders}">Orders</a>
-      <a th:href="@{/login}">Logout</a>
-    </nav>
-  </div>
-</header>
+  <header class="main-header">
+    <div class="container header-content">
+      <h1 class="logo">🛍️ Storefront Admin</h1>
+      <nav class="main-nav">
+        <a th:href="@{/admin/products}">Products</a>
+        <a th:href="@{/admin/orders}">Orders</a>
+        <a th:href="@{/login}" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Logout</a>
+      </nav>
+    </div>
+  </header>
 
-<main class="container dashboard">
-  <section class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-    <div class="card stat-card" style="text-align: center;">
-      <h3>Total Users</h3>
-      <p class="stat-value" style="font-size: 2rem; font-weight: bold;" th:text="${totalUsers}">0</p>
-    </div>
-    <div class="card stat-card" style="text-align: center;">
-      <h3>Total Products</h3>
-      <p class="stat-value" style="font-size: 2rem; font-weight: bold;" th:text="${totalProducts}">0</p>
-    </div>
-    <div class="card stat-card" style="text-align: center;">
-      <h3>Total Orders</h3>
-      <p class="stat-value" style="font-size: 2rem; font-weight: bold;" th:text="${totalOrders}">0</p>
-    </div>
-    <div class="card stat-card" style="text-align: center;">
-      <h3>Total Revenue</h3>
-      <p class="stat-value" style="font-size: 2rem; font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(totalRevenue, 1, 2)}">$0.00</p>
-    </div>
-  </section>
+  <main class="container animate-fade-in" style="padding-top: 3rem;">
+    <section class="stats-grid"
+      style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+      <div class="card">
+        <h3 style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase;">Total Users</h3>
+        <p class="stat-value" th:text="${totalUsers}">0</p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase;">Total Products</h3>
+        <p class="stat-value" th:text="${totalProducts}">0</p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase;">Total Orders</h3>
+        <p class="stat-value" th:text="${totalOrders}">0</p>
+      </div>
+      <div class="card">
+        <h3 style="color: var(--text-muted); font-size: 0.875rem; text-transform: uppercase;">Total Revenue</h3>
+        <p class="stat-value" th:text="'$' + ${#numbers.formatDecimal(totalRevenue, 1, 2)}">$0.00</p>
+      </div>
+    </section>
 
-  <h2 class="page-title">Quick Actions</h2>
-  <section class="card-grid">
-    <div class="card">
-      <h3>Manage Products</h3>
-      <p>View, edit, and delete products from the catalog.</p>
-      <a th:href="@{/admin/products}" class="btn">Go to Products</a>
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+      <div class="card">
+        <h3 style="margin-bottom: 1.5rem;">Revenue Analytics</h3>
+        <canvas id="revenueChart" style="max-height: 300px;"></canvas>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom: 1.5rem;">Quick Actions</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <a th:href="@{/admin/products/new}" class="btn btn-primary" style="justify-content: flex-start;">Add New
+            Product</a>
+          <a th:href="@{/admin/products}" class="btn btn-secondary" style="justify-content: flex-start;">Review
+            Inventory</a>
+          <a th:href="@{/admin/orders}" class="btn btn-secondary" style="justify-content: flex-start;">Process
+            Orders</a>
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <h3>View Orders</h3>
-      <p>See all orders placed by users.</p>
-      <a th:href="@{/admin/orders}" class="btn">Go to Orders</a>
-    </div>
-  </section>
-</main>
+  </main>
+
+  <script th:inline="javascript">
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Monthly Revenue ($)',
+          data: [1200, 1900, 3000, 2500, /*[[${totalRevenue}]]*/ 4000, 4500],
+          borderColor: '#38bdf8',
+          backgroundColor: 'rgba(56, 189, 248, 0.1)',
+          tension: 0.4,
+          fill: true,
+          pointBackgroundColor: '#38bdf8'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+          x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+        }
+      }
+    });
+  </script>
 </body>
+
 </html>
