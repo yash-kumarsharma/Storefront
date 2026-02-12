@@ -51,53 +51,24 @@ A modern, premium e-commerce platform built with Spring Boot and cutting-edge we
 ## 📸 Screenshots
 
 ### Home Page
-<!-- TODO: Add screenshot of home page -->
-<!-- To capture: Navigate to http://localhost:8796/ and take a screenshot -->
 ![Home Page](screenshots/home.png)
 
 *Modern hero section with feature cards showcasing Lightning Fast, Secure & Safe, Smart Analytics, and Global Reach*
 
-### Login Page
-<!-- TODO: Add screenshot of login page -->
-<!-- To capture: Navigate to http://localhost:8796/login and take a screenshot -->
-![Login Page](screenshots/login.png)
-
-*Spacious "Welcome Back" card with glassmorphic effects and emerald glow*
-
 ### Signup Page
-<!-- TODO: Add screenshot of signup page -->
-<!-- To capture: Navigate to http://localhost:8796/signup and take a screenshot -->
 ![Signup Page](screenshots/signup.png)
 
 *"Join Storefront" card with two-column layout for efficient registration*
 
 ### Admin Dashboard
-<!-- TODO: Add screenshot of admin dashboard -->
-<!-- To capture: Login as admin, navigate to http://localhost:8796/admin/dashboard -->
 ![Admin Dashboard](screenshots/admin-dashboard.png)
 
 *Real-time statistics and revenue analytics with Chart.js visualizations*
 
 ### Product Management
-<!-- TODO: Add screenshot of product management page -->
-<!-- To capture: Navigate to http://localhost:8796/admin/products -->
 ![Product Management](screenshots/admin-products.png)
 
 *Comprehensive product CRUD interface with search functionality*
-
-### User Dashboard
-<!-- TODO: Add screenshot of user dashboard -->
-<!-- To capture: Login as user, navigate to http://localhost:8796/user/dashboard -->
-![User Dashboard](screenshots/user-dashboard.png)
-
-*Personal statistics with Chart.js doughnut chart visualization*
-
-### Product Catalog
-<!-- TODO: Add screenshot of product catalog -->
-<!-- To capture: Navigate to http://localhost:8796/user/products -->
-![Product Catalog](screenshots/user-products.png)
-
-*Modern grid layout with glassmorphic product cards*
 
 ---
 
@@ -249,50 +220,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
+- GitHub: [@yourusername](https://github.com/yash-kumarsharma))
 
----
-
-## 🙏 Acknowledgments
-
-- Spring Boot team for the excellent framework
-- Chart.js for beautiful data visualizations
-- Google Fonts for Plus Jakarta Sans typography
-- The open-source community
-
----
-
-## 📌 How to Add Screenshots
-
-To complete the README with screenshots:
-
-1. **Start your application**: `mvn spring-boot:run`
-
-2. **Create a screenshots folder** in your project root:
-   ```bash
-   mkdir screenshots
-   ```
-
-3. **Capture screenshots** of each page:
-   - Home: `http://localhost:8796/`
-   - Login: `http://localhost:8796/login`
-   - Signup: `http://localhost:8796/signup`
-   - Admin Dashboard: `http://localhost:8796/admin/dashboard` (after admin login)
-   - Products: `http://localhost:8796/admin/products`
-   - User Dashboard: `http://localhost:8796/user/dashboard` (after user login)
-   - Catalog: `http://localhost:8796/user/products`
-
-4. **Save screenshots** as PNG files in the `screenshots/` folder with these names:
-   - `home.png`
-   - `login.png`
-   - `signup.png`
-   - `admin-dashboard.png`
-   - `admin-products.png`
-   - `user-dashboard.png`
-   - `user-products.png`
-
-5. **Commit and push** the screenshots folder to your repository
 
 ---
 
