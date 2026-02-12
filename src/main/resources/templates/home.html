@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome | Product Co.</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<header class="main-header">
+    <div class="container header-content">
+        <h1 class="logo">Product Co.</h1>
+        <nav class="main-nav">
+            <a th:href="@{/login}">Login</a>
+            <a th:href="@{/signup}">Sign Up</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container center text-center">
+    <section class="hero">
+        <h1>Welcome to Product Co.</h1>
+        <p>Your one-stop solution for product management and browsing.</p>
+        <br>
+        <div class="hero-actions">
+            <a th:href="@{/login}" class="btn">Login Now</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

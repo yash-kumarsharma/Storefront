@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Products</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <h1 class="logo">Product Co.</h1>
+            <nav class="main-nav">
+                <a th:href="@{/user/dashboard}">Dashboard</a>
+                <a th:href="@{/user/orders}">My Orders</a>
+                <a th:href="@{/login}">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 class="page-title">Available Products</h2>
+
+        <div class="search-section" style="margin-bottom: 2rem;">
+            <form th:action="@{/user/products/search}" method="get" class="search-form"
+                style="display: flex; gap: 1rem;">
+                <input type="text" name="q" th:value="${searchQuery}" placeholder="Search products..."
+                    style="flex-grow: 1; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;" required />
+                <button type="submit" class="btn">Search</button>
+                <a th:if="${searchQuery}" th:href="@{/user/products}" class="btn btn-secondary"
+                    style="background-color: #6c757d;">Clear</a>
+            </form>
+        </div>
+        <div class="table-wrapper">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="p : ${products}">
+                        <td th:text="${p.id}">1</td>
+                        <td th:text="${p.name}">Name</td>
+                        <td th:text="${p.description}">Description</td>
+                        <td th:text="'$' + ${p.price}">$0.00</td>
+                        <td th:text="${p.quantity}">0</td>
+                        <td>
+                            <form th:action="@{'/user/order/' + ${p.id}}" method="post">
+                                <button type="submit" class="btn">Order</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

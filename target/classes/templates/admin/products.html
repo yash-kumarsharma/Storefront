@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Manage Products</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <h1 class="logo">Product Admin</h1>
+            <nav class="main-nav">
+                <a th:href="@{/admin/dashboard}">Dashboard</a>
+                <a th:href="@{/admin/orders}">Orders</a>
+                <a th:href="@{/login}">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="products-header">
+            <h2 class="page-title">Manage Products</h2>
+            <a th:href="@{/admin/products/new}" class="btn">+ Create New Product</a>
+        </div>
+
+        <div class="search-section" style="margin-bottom: 2rem;">
+            <form th:action="@{/admin/products/search}" method="get" class="search-form"
+                style="display: flex; gap: 1rem;">
+                <input type="text" name="q" th:value="${searchQuery}" placeholder="Search products..."
+                    style="flex-grow: 1; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px;" required />
+                <button type="submit" class="btn">Search</button>
+                <a th:if="${searchQuery}" th:href="@{/admin/products}" class="btn btn-secondary"
+                    style="background-color: #6c757d;">Clear</a>
+            </form>
+        </div>
+        <div class="table-wrapper">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="p : ${products}">
+                        <td th:text="${p.id}">1</td>
+                        <td th:text="${p.name}">Name</td>
+                        <td th:text="${p.description}">Description</td>
+                        <td th:text="'$' + ${p.price}">$0.00</td>
+                        <td th:text="${p.quantity}">0</td>
+                        <td>
+                            <a th:href="@{'/admin/products/edit/' + ${p.id}}" class="btn btn-edit">Edit</a>
+                            <form th:action="@{'/admin/products/delete/' + ${p.id}}" method="post"
+                                style="display:inline">
+                                <button type="submit" class="btn btn-delete">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

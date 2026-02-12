@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>User Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<header class="main-header">
+    <div class="container header-content">
+        <h1 class="logo">Product Co.</h1>
+        <nav class="main-nav">
+            <a th:href="@{/user/products}">Products</a>
+            <a th:href="@{/user/orders}">My Orders</a>
+            <a th:href="@{/login}">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container dashboard">
+    <h2 class="page-title">Welcome, User!</h2>
+    <p class="text-center">You have placed <span th:text="${orderCount}">0</span> orders.</p>
+    <div class="text-center" style="margin-top: 2rem;">
+        <a th:href="@{/user/products}" class="btn">Browse Products</a>
+    </div>
+</main>
+</body>
+</html>

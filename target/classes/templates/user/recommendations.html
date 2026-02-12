@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Recommendations | Product Co.</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<header class="main-header">
+  <div class="container header-content">
+    <h1 class="logo">Product Co.</h1>
+    <nav class="main-nav">
+      <a th:href="@{/user/dashboard}">Dashboard</a>
+      <a th:href="@{/user/products}">Products</a>
+      <a th:href="@{/user/orders}">My Orders</a>
+      <a th:href="@{/login}">Logout</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="recommendations-section">
+    <h1 class="page-title">Recommended Products for You</h1>
+    <div class="table-wrapper">
+      <table class="styled-table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${recommendedProducts}">
+          <td th:text="${p.id}"></td>
+          <td th:text="${p.name}"></td>
+          <td th:text="${p.description}"></td>
+          <td th:text="'$' + ${p.price}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+</html>

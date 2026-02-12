@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<header class="main-header">
+  <div class="container header-content">
+    <h1 class="logo">Product Admin</h1>
+    <nav class="main-nav">
+      <a th:href="@{/admin/products}">Products</a>
+      <a th:href="@{/admin/orders}">Orders</a>
+      <a th:href="@{/login}">Logout</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container dashboard">
+  <section class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+    <div class="card stat-card" style="text-align: center;">
+      <h3>Total Users</h3>
+      <p class="stat-value" style="font-size: 2rem; font-weight: bold;" th:text="${totalUsers}">0</p>
+    </div>
+    <div class="card stat-card" style="text-align: center;">
+      <h3>Total Products</h3>
+      <p class="stat-value" style="font-size: 2rem; font-weight: bold;" th:text="${totalProducts}">0</p>
+    </div>
+    <div class="card stat-card" style="text-align: center;">
+      <h3>Total Orders</h3>
+      <p class="stat-value" style="font-size: 2rem; font-weight: bold;" th:text="${totalOrders}">0</p>
+    </div>
+    <div class="card stat-card" style="text-align: center;">
+      <h3>Total Revenue</h3>
+      <p class="stat-value" style="font-size: 2rem; font-weight: bold;" th:text="'$' + ${#numbers.formatDecimal(totalRevenue, 1, 2)}">$0.00</p>
+    </div>
+  </section>
+
+  <h2 class="page-title">Quick Actions</h2>
+  <section class="card-grid">
+    <div class="card">
+      <h3>Manage Products</h3>
+      <p>View, edit, and delete products from the catalog.</p>
+      <a th:href="@{/admin/products}" class="btn">Go to Products</a>
+    </div>
+    <div class="card">
+      <h3>View Orders</h3>
+      <p>See all orders placed by users.</p>
+      <a th:href="@{/admin/orders}" class="btn">Go to Orders</a>
+    </div>
+  </section>
+</main>
+</body>
+</html>

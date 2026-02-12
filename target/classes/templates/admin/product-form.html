@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${product.id == null ? 'Create Product' : 'Edit Product'}"></title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<header class="main-header">
+  <div class="container header-content">
+    <h1 class="logo">Product Admin</h1>
+    <nav class="main-nav">
+      <a th:href="@{/admin/dashboard}">Dashboard</a>
+      <a th:href="@{/admin/products}">Products</a>
+      <a th:href="@{/login}">Logout</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="form-section center">
+    <h2 class="page-title" th:text="${product.id == null ? 'Create Product' : 'Edit Product'}"></h2>
+
+    <form th:action="@{/admin/products}" th:object="${product}" method="post" class="styled-form">
+      <input type="hidden" th:field="*{id}" />
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" th:field="*{name}" required />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" th:field="*{description}"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" step="0.01" id="price" th:field="*{price}" required />
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" th:field="*{quantity}" required />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn">Save Product</button>
+      </div>
+    </form>
+  </section>
+</main>
+</body>
+</html>

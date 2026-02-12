@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>All Orders</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+<header class="main-header">
+    <div class="container header-content">
+        <h1 class="logo">Product Admin</h1>
+        <nav class="main-nav">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/products}">Products</a>
+            <a th:href="@{/login}">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <h2 class="page-title">All Customer Orders</h2>
+    <div class="table-wrapper">
+        <table class="styled-table">
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Products</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="o : ${orders}">
+                <td th:text="${o.id}">Order ID</td>
+                <td th:text="${#temporals.format(o.orderDate, 'dd-MM-yyyy HH:mm')}">Date</td>
+                <td>
+                    <ul>
+                        <li th:each="p : ${o.products}" th:text="${p.name}">Product</li>
+                    </ul>
+                </td>
+                <td th:text="${o.status}">Status</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>
