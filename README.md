@@ -51,22 +51,22 @@ A modern, premium e-commerce platform built with Spring Boot and cutting-edge we
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](screenshots/home.png)
+![Home Page](screenshot/home.png)
 
 *Modern hero section with feature cards showcasing Lightning Fast, Secure & Safe, Smart Analytics, and Global Reach*
 
 ### Signup Page
-![Signup Page](screenshots/signup.png)
+![Signup Page](screenshot/signup.png)
 
 *"Join Storefront" card with two-column layout for efficient registration*
 
 ### Admin Dashboard
-![Admin Dashboard](screenshots/admin-dashboard.png)
+![Admin Dashboard](screenshot/admin-dashboard.png)
 
 *Real-time statistics and revenue analytics with Chart.js visualizations*
 
 ### Product Management
-![Product Management](screenshots/admin-products.png)
+![Product Management](screenshot/admin-products.png)
 
 *Comprehensive product CRUD interface with search functionality*
 
