@@ -219,10 +219,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yash-kumarsharma))
+**Built with ❤️ and 💻 by:**
 
+[![Yash Kumar Sharma](https://img.shields.io/badge/GitHub-Yash%20Kumar%20Sharma-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yash-kumarsharma)
 
 ---
 
-**Built with ❤️ using Spring Boot & Modern Web Technologies**
